@@ -1,0 +1,11 @@
+# Raw datasets
+data/*.csv
+data/*.zip
+
+# Generated pages
+reports/
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
