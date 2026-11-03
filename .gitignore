@@ -1,11 +1,51 @@
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# macOS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+
+# Node
+frontend/node_modules/
+frontend/dist/
+
+# Logs
+*.log
+
 # Raw datasets
 data/*.csv
 data/*.zip
 
-# Generated pages
-reports/
+# Notebook checkpoints
+.ipynb_checkpoints/
 
-# Python
-__pycache__/
-*.py[cod]
-.pytest_cache/
+# Temporary files
+*.tmp
+*.temp
+
+# Coverage
+.coverage
+htmlcov/
+
+# Training-only artifacts
+artifacts/reranker_training_data.pkl
+
+artifacts/reranker_logistic.pkl
+
+# Generated reports and local import storage
+/reports/
+*.sqlite3
+*.sqlite3-shm
+*.sqlite3-wal
