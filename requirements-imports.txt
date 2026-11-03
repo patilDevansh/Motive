@@ -1,0 +1,5 @@
+# Local import service and its HTTP tests; no recommendation models required.
+fastapi==0.128.8
+httpx==0.28.1
+uvicorn==0.39.0
+pytest==8.4.2
