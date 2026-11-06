@@ -46,6 +46,8 @@ artifacts/reranker_logistic.pkl
 
 # Generated reports and local import storage
 /reports/
+
+# Local SQLite databases
 *.sqlite3
 *.sqlite3-shm
 *.sqlite3-wal
