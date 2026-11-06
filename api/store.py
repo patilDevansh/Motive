@@ -23,10 +23,12 @@ def create_app(db_path):
         return CatalogStore(db_path).list_products(store_id, limit, offset)
 
     @app.get('/stores/{store_id}/products/stats')
-    def product_stats(store_id: str, limit: int = Query(50, ge=1, le=100), offset: int = Query(0, ge=0)):
+    def product_stats(store_id: str, limit: int = Query(50, ge=1, le=100), offset: int = Query(0, ge=0),
+                      start: str | None = None, end: str | None = None):
         #makes the tables if the database is new
         EventStore(db_path)
-        return get_product_stats(db_path, store_id, limit, offset)
+        return get_product_stats(db_path, store_id, limit, offset, start, end)
+
 
     @app.post('/stores/{store_id}/events/import')
     def import_events(store_id: str, body: str = Body('', media_type='text/csv')):
