@@ -11,4 +11,4 @@ jobs:
         with:
           python-version: '3.11'
       - run: python -m pip install -r requirements-imports.txt pandas
-      - run: python -m pytest tests/test_S2_*.py tests/test_product_stats.py -q
+      - run: python -m pytest tests/test_S[0-9]*_*.py tests/test_product_stats.py -q
