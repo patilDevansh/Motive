@@ -5,6 +5,7 @@ from fastapi.responses import JSONResponse
 from src.catalog_store import CatalogStore, ImportValidationError
 from src.event_store import EventStore
 from src.product_event_stats import get_product_stats
+from src.store_auth import require_store_keys
 
 
 def create_app(db_path):
@@ -42,3 +43,5 @@ def create_app(db_path):
 
 
 app = create_app(os.environ.get('MOTIVE_STORE_DB', 'motive-store.sqlite3'))
+if os.environ.get('MOTIVE_STORE_AUTH', '').strip().lower() == 'required':
+    require_store_keys(app, os.environ.get('MOTIVE_STORE_DB', 'motive-store.sqlite3'))

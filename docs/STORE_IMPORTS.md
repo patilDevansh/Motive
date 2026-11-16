@@ -19,3 +19,9 @@ e1,u1,p1,view,2026-11-03T10:00:00-08:00
 ```
 
 Events are `view`, `cart`, or `purchase`. Timestamps must include a timezone and are stored in UTC. GET `/stores/{store_id}/events` returns them in timestamp order. Identical event IDs skip; conflicting IDs reject the whole file. These endpoints are local development interfaces and require owner authentication before public deployment.
+
+## Store API keys (S3-04)
+
+Create a key for a store with `python -m scripts.create_store_key STORE_ID [--db PATH]`. The key is printed once and only its SHA-256 digest is stored; running the command again replaces the key and the old one stops working.
+
+Start the service with `MOTIVE_STORE_AUTH=required` to enforce keys. Every `/stores/{store_id}/...` request must then send `Authorization: Bearer <key>` for that store. A missing key returns HTTP 401 and a key that is not valid for the store returns HTTP 403, both as `{"errors":[{"line":0,"field":"authorization","message":"..."}]}`. With the variable unset the service behaves as before and needs no key, so keep it bound to localhost in that mode.
