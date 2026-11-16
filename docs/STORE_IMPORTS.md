@@ -9,6 +9,14 @@ product_id,name,category,price,currency,available,url
 p1,Chair,Home,12.50,USD,true,https://example.com/p1
 ```
 
+Both import endpoints also accept a browser file upload: send `multipart/form-data` with the CSV in a file part named `file` (S3-03). The result is the same as sending that text as `text/csv`.
+
+```sh
+curl -F file=@catalog.csv http://127.0.0.1:8000/stores/demo/catalog/import
+```
+
+Upload problems return `{"errors":[{"line":0,"field":"file","message":"..."}]}`: HTTP 400 when the `file` part is missing or the file is not UTF-8, HTTP 413 when it is larger than 5 MB, and HTTP 415 for any other content type.
+
 The response reports inserted and updated counts. Validation returns HTTP 400 with line/field/message errors and no partial writes. Product reads use GET `/stores/{store_id}/products?limit=50&offset=0`. The implementation and complete edge-case contract are in the S2-03 task specification. This service is independent of the Retailrocket model API and needs no model artifacts.
 
 Event imports require catalog products first. POST text/csv to `/stores/{store_id}/events/import`:
