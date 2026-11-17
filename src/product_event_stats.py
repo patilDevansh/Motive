@@ -46,6 +46,13 @@ def parse_time(text, field):
     return value.astimezone(timezone.utc)
 
 
+def rate(count, views):
+    #cant divide by 0 so no views means no rate
+    if views == 0:
+        return None
+    return round(count / views, 4)
+
+
 def get_product_stats(db_path, store_id, limit=50, offset=0, start=None, end=None):
     store_id = store_key(store_id)
 
@@ -81,6 +88,10 @@ def get_product_stats(db_path, store_id, limit=50, offset=0, start=None, end=Non
 
     items = []
     for row in rows:
-        items.append(dict(row))
+        item = dict(row)
+        #rates use the counts above so they follow the date range too
+        item["view_to_cart_rate"] = rate(item["carts"], item["views"])
+        item["view_to_purchase_rate"] = rate(item["purchases"], item["views"])
+        items.append(item)
 
     return {"items": items, "total": total, "limit": limit, "offset": offset}

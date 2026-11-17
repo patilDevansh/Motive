@@ -43,9 +43,12 @@ EVENTS_B = (
     "b5,x5,p1,view,2026-10-01T10:00:00Z\n"
 )
 
-P1 = {"product_id": "p1", "name": "Blue Mug", "category": "kitchen", "views": 3, "carts": 1, "purchases": 1}
-P2 = {"product_id": "p2", "name": "Red Lamp", "category": "home", "views": 1, "carts": 2, "purchases": 0}
-P3 = {"product_id": "p3", "name": "Green Pen", "category": "office", "views": 0, "carts": 0, "purchases": 0}
+P1 = {"product_id": "p1", "name": "Blue Mug", "category": "kitchen", "views": 3, "carts": 1, "purchases": 1,
+      "view_to_cart_rate": 0.3333, "view_to_purchase_rate": 0.3333}
+P2 = {"product_id": "p2", "name": "Red Lamp", "category": "home", "views": 1, "carts": 2, "purchases": 0,
+      "view_to_cart_rate": 2.0, "view_to_purchase_rate": 0.0}
+P3 = {"product_id": "p3", "name": "Green Pen", "category": "office", "views": 0, "carts": 0, "purchases": 0,
+      "view_to_cart_rate": None, "view_to_purchase_rate": None}
 
 
 @pytest.fixture
